@@ -33,7 +33,7 @@ export default async function HomePage() {
   const supabase = await createClient();
   
   // Fetch proven bestsellers (3 products)
-  const { data: bestsellers } = await supabase
+  const { data: bestsellers } = await (supabase as any)
     .from('products')
     .select('*')
     .eq('status', 'active')
@@ -41,7 +41,7 @@ export default async function HomePage() {
     .limit(3);
 
   // Fetch new arrivals (4 most recent products)
-  const { data: newArrivals } = await supabase
+  const { data: newArrivals } = await (supabase as any)
     .from('products')
     .select('*')
     .eq('status', 'active')
@@ -49,7 +49,7 @@ export default async function HomePage() {
     .limit(4);
 
   // Fetch specific categories for "Shop our top categories" section
-  const { data: topCategories } = await supabase
+  const { data: topCategories } = await (supabase as any)
     .from('categories')
     .select('*')
     .in('slug', ['kitchen', 'office', 'furniture', 'home-appliances', 'tools'])
@@ -70,32 +70,25 @@ export default async function HomePage() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section with Two Images */}
+      {/* Hero Section with Two Images - Exact same as reference site */}
       <section className="relative w-full">
-        <div className="grid grid-cols-1 md:grid-cols-2 h-[600px] md:h-[700px]">
-          {/* Left Image - Packaging/Shipping (person with tape dispenser) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 h-[420px]">
+          {/* Left Image - Packaging/Shipping (person with tape dispenser) - Exact from reference */}
           <div className="relative h-full w-full overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1605745341112-85968b19335b?w=1200&q=80"
+              src="https://crelyztradeinc.com/cdn/shop/files/pexels-ketut-subiyanto-4246109.jpg?v=1755780336&width=1500"
               alt="Packaging and shipping"
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-black opacity-10"></div>
           </div>
           
-          {/* Right Image - Warehouse with Overlay Text */}
+          {/* Right Image - Warehouse with text overlay - Exact from reference */}
           <div className="relative h-full w-full overflow-hidden">
             <img
-              src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1200&q=80"
-              alt="Warehouse storage with shelves and products"
+              src="https://crelyztradeinc.com/cdn/shop/files/warehouse-image-saying-that-design-your-house-with-wholesale-rate.png?v=1755780197&width=1500"
+              alt="Design your house with wholesale rates"
               className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50"></div>
-            <div className="absolute inset-0 flex items-center justify-center md:justify-start md:items-end md:p-8 lg:p-12">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold text-white drop-shadow-[0_4px_8px_rgba(0,0,0,0.8)] px-4 md:px-0 text-center md:text-left leading-tight uppercase tracking-tight">
-                DESIGN YOUR HOUSE WITH WHOLESALE RATES
-              </h2>
-            </div>
           </div>
         </div>
         

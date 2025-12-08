@@ -4,11 +4,11 @@ import EnquiryForm from '@/components/EnquiryForm';
 import Link from 'next/link';
 
 interface ProductDetailPageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
-  const { slug } = params;
+  const { slug } = await params;
   const supabase = await createClient();
 
   const { data: product, error } = await (supabase as any)
@@ -18,7 +18,12 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
     .eq('status', 'active')
     .single();
 
-  if (error || !product) {
+  if (error) {
+    console.error('Error fetching product:', error);
+    notFound();
+  }
+
+  if (!product) {
     notFound();
   }
 

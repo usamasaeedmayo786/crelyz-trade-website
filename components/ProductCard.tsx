@@ -33,7 +33,7 @@ export default function ProductCard({ product, isOnSale = false, originalPrice }
                   }}
                 />
                 {isOnSale && (
-                  <div className="absolute top-2 left-2 bg-red-600 text-white px-3 py-1 rounded-md text-sm font-bold z-10">
+                  <div className="absolute bottom-2 left-2 bg-black text-white px-3 py-1 rounded text-sm font-semibold z-10">
                     Sale
                   </div>
                 )}

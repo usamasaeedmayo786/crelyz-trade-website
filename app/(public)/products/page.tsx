@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import ProductCard from '@/components/ProductCard';
-import ProductFilter from '@/components/ProductFilter';
+import CatalogFilter from '@/components/CatalogFilter';
 import { Product, Category } from '@/types/database';
 
 export default function ProductsPage() {
@@ -11,10 +11,15 @@ export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
-  const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string | null>(
     searchParams.get('category')
   );
+  const [sortBy, setSortBy] = useState<string>('featured');
+  const [availability, setAvailability] = useState<string>('');
+  const [priceRange, setPriceRange] = useState<{ min: number | null; max: number | null }>({
+    min: null,
+    max: null,
+  });
 
   useEffect(() => {
     fetchCategories();
@@ -22,7 +27,7 @@ export default function ProductsPage() {
 
   useEffect(() => {
     fetchProducts();
-  }, [searchQuery, selectedCategory]);
+  }, [selectedCategory]);
 
   const fetchCategories = async () => {
     try {
@@ -40,7 +45,6 @@ export default function ProductsPage() {
     setLoading(true);
     try {
       const params = new URLSearchParams();
-      if (searchQuery) params.append('search', searchQuery);
       if (selectedCategory) params.append('category', selectedCategory);
 
       const response = await fetch(`/api/products?${params.toString()}`);
@@ -55,31 +59,85 @@ export default function ProductsPage() {
     }
   };
 
-  return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-4xl font-bold text-gray-900 mb-8">Our Products</h1>
+  // Filter and sort products
+  const filteredAndSortedProducts = useMemo(() => {
+    let filtered = [...products];
 
-        <ProductFilter
+    // Filter by availability
+    if (availability === 'in_stock') {
+      filtered = filtered.filter((p) => (p.stock_quantity ?? 0) > 0);
+    } else if (availability === 'out_of_stock') {
+      filtered = filtered.filter((p) => (p.stock_quantity ?? 0) === 0);
+    }
+
+    // Filter by price range
+    if (priceRange.min !== null) {
+      filtered = filtered.filter((p) => (p.price ?? 0) >= priceRange.min!);
+    }
+    if (priceRange.max !== null) {
+      filtered = filtered.filter((p) => (p.price ?? 0) <= priceRange.max!);
+    }
+
+    // Sort products
+    switch (sortBy) {
+      case 'alphabetically_az':
+        filtered.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case 'alphabetically_za':
+        filtered.sort((a, b) => b.name.localeCompare(a.name));
+        break;
+      case 'price_low_high':
+        filtered.sort((a, b) => (a.price ?? 0) - (b.price ?? 0));
+        break;
+      case 'price_high_low':
+        filtered.sort((a, b) => (b.price ?? 0) - (a.price ?? 0));
+        break;
+      case 'date_old_new':
+        filtered.sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+        break;
+      case 'date_new_old':
+        filtered.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+        break;
+      case 'best_selling':
+        // For now, sort by creation date (newest first) as we don't have sales data
+        filtered.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime());
+        break;
+      case 'featured':
+      default:
+        // Keep original order (already sorted by created_at desc from API)
+        break;
+    }
+
+    return filtered;
+  }, [products, availability, priceRange, sortBy]);
+
+  return (
+    <div className="min-h-screen bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Products</h1>
+
+        <CatalogFilter
           categories={categories}
-          onSearchChange={setSearchQuery}
           onCategoryChange={setSelectedCategory}
-          searchQuery={searchQuery}
+          onSortChange={setSortBy}
+          onAvailabilityChange={setAvailability}
+          onPriceRangeChange={(min, max) => setPriceRange({ min, max })}
           selectedCategory={selectedCategory}
+          productCount={filteredAndSortedProducts.length}
         />
 
         {loading ? (
           <div className="text-center py-12">
             <p className="text-gray-500">Loading products...</p>
           </div>
-        ) : products.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {products.map((product) => (
+        ) : filteredAndSortedProducts.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {filteredAndSortedProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
         ) : (
-          <div className="text-center py-12 bg-white rounded-lg shadow-md">
+          <div className="text-center py-12 bg-white">
             <p className="text-gray-500">No products found matching your criteria.</p>
           </div>
         )}

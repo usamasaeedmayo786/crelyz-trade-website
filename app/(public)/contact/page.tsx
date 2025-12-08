@@ -52,8 +52,17 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white py-12">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-white">
+      {/* Landscape Banner Image - Exact same as reference site */}
+      <div className="w-full h-[300px] md:h-[400px] overflow-hidden relative">
+        <img
+          src="https://crelyztradeinc.com/cdn/shop/files/stocked-pallet-in-warehouse.jpg?v=1755878463&width=1500"
+          alt="Contact Us"
+          className="w-full h-full object-cover"
+        />
+      </div>
+
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Header Section */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
