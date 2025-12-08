@@ -4,14 +4,14 @@ import EnquiryForm from '@/components/EnquiryForm';
 import Link from 'next/link';
 
 interface ProductDetailPageProps {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }
 
 export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
-  const { slug } = await params;
+  const { slug } = params;
   const supabase = await createClient();
 
-  const { data: product, error } = await supabase
+  const { data: product, error } = await (supabase as any)
     .from('products')
     .select('*, categories(*)')
     .eq('slug', slug)
@@ -47,7 +47,7 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
                   </div>
                   {product.images.length > 1 && (
                     <div className="grid grid-cols-4 gap-2">
-                      {product.images.slice(1).map((image, index) => (
+                      {product.images.slice(1).map((image: string, index: number) => (
                         <div key={index} className="aspect-w-1 aspect-h-1 w-full overflow-hidden bg-gray-200 rounded">
                           <img
                             src={image}

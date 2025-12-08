@@ -9,7 +9,7 @@ export async function GET(
     const { id } = await params;
     const supabase = await createClient();
 
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
       .from('products')
       .select('*, categories(*)')
       .eq('id', id)
@@ -43,7 +43,7 @@ export async function PUT(
     }
 
     const body = await request.json();
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
       .from('products')
       .update(body)
       .eq('id', id)
@@ -77,7 +77,7 @@ export async function DELETE(
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
 
-    const { error } = await supabase
+    const { error } = await (supabase as any)
       .from('products')
       .delete()
       .eq('id', id);

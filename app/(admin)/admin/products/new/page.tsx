@@ -1,32 +1,25 @@
 import { createClient } from '@/lib/supabase/server';
 import { redirect } from 'next/navigation';
 import ProductForm from '@/components/Admin/ProductForm';
-import { Database } from '@/types/database';
-
-// Insert type, if you want to keep it for form typing
-type ProductInsert = Database['public']['Tables']['products']['Insert'];
+import { ProductInsert, ProductUpdate } from '@/types/database';
 
 export default async function NewProductPage() {
   const supabase = await createClient();
 
-  const { data: categories } = await supabase
+  const { data: categories } = await (supabase as any)
     .from('categories')
     .select('*')
     .order('name', { ascending: true });
 
-  async function handleSubmit(data: ProductInsert) {
+  async function handleSubmit(data: ProductInsert | ProductUpdate) {
     'use server';
-
     const supabase = await createClient();
 
-    // 🔥 Key fix: relax Supabase typing only for this call
     const { error } = await (supabase as any)
       .from('products')
       .insert(data as any);
 
-    if (error) {
-      throw new Error(error.message);
-    }
+    if (error) throw new Error(error.message);
 
     redirect('/admin/products');
   }
@@ -40,7 +33,7 @@ export default async function NewProductPage() {
         <div className="bg-white shadow rounded-lg p-6">
           <ProductForm
             categories={categories || []}
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit as any}
           />
         </div>
       </div>

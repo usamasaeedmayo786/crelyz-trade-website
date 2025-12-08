@@ -6,7 +6,7 @@ export async function POST(request: NextRequest) {
     const supabase = await createClient();
     const body = await request.json();
 
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
       .from('enquiries')
       .insert({
         name: body.name,

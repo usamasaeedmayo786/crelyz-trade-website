@@ -16,7 +16,7 @@ type ProductRow = {
 export default async function ProductsManagementPage() {
   const supabase = await createClient();
 
-  const { data } = await supabase
+  const { data } = await (supabase as any)
     .from('products')
     .select('*, categories(name)')
     .order('created_at', { ascending: false });

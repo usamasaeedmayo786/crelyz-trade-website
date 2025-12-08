@@ -7,14 +7,14 @@ import { Database } from '@/types/database';
 type ProductUpdate = Database['public']['Tables']['products']['Update'];
 
 interface EditProductPageProps {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }
 
 export default async function EditProductPage({ params }: EditProductPageProps) {
-  const { id } = await params;
+  const { id } = params;
   const supabase = await createClient();
 
-  const { data: product } = await supabase
+  const { data: product } = await (supabase as any)
     .from('products')
     .select('*')
     .eq('id', id)
@@ -24,12 +24,13 @@ export default async function EditProductPage({ params }: EditProductPageProps) 
     notFound();
   }
 
-  const { data: categories } = await supabase
+  const { data: categories } = await (supabase as any)
     .from('categories')
     .select('*')
     .order('name', { ascending: true });
 
   async function handleSubmit(data: ProductUpdate) {
+    'use server';
     const supabase = await createClient();
 
     const { error } = await (supabase as any)
@@ -52,7 +53,7 @@ export default async function EditProductPage({ params }: EditProductPageProps) 
           <ProductForm
             product={product}
             categories={categories || []}
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit as any}
           />
         </div>
       </div>

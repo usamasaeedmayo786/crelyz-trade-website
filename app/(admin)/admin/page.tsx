@@ -5,24 +5,24 @@ export default async function AdminDashboard() {
   const supabase = await createClient();
 
   // Total products
-  const { count: productCount } = await supabase
+  const { count: productCount } = await (supabase as any)
     .from('products')
     .select('*', { count: 'exact', head: true });
 
   // Active products
-  const { count: activeProductCount } = await supabase
+  const { count: activeProductCount } = await (supabase as any)
     .from('products')
     .select('*', { count: 'exact', head: true })
     .eq('status', 'active');
 
   // New enquiries
-  const { count: newEnquiryCount } = await supabase
+  const { count: newEnquiryCount } = await (supabase as any)
     .from('enquiries')
     .select('*', { count: 'exact', head: true })
     .eq('status', 'new');
 
   // Total enquiries
-  const { count: totalEnquiryCount } = await supabase
+  const { count: totalEnquiryCount } = await (supabase as any)
     .from('enquiries')
     .select('*', { count: 'exact', head: true });
 

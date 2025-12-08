@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const status = searchParams.get('status');
 
-    let query = supabase
+    let query = (supabase as any)
       .from('enquiries')
       .select('*, products(name, sku)')
       .order('created_at', { ascending: false });
@@ -51,7 +51,7 @@ export async function PUT(request: NextRequest) {
     const body = await request.json();
     const { id, ...updates } = body;
 
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
       .from('enquiries')
       .update(updates)
       .eq('id', id)

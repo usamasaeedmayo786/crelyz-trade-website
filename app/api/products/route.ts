@@ -8,7 +8,7 @@ export async function GET(request: NextRequest) {
     const search = searchParams.get('search');
     const category = searchParams.get('category');
 
-    let query = supabase
+    let query = (supabase as any)
       .from('products')
       .select('*, categories(*)')
       .eq('status', 'active')
@@ -48,7 +48,7 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json();
-    const { data, error } = await supabase
+    const { data, error } = await (supabase as any)
       .from('products')
       .insert(body)
       .select()

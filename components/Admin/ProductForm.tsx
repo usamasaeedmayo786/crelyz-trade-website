@@ -2,13 +2,16 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Product, Category, ProductInsert, ProductUpdate } from '@/types/database';
+import { Database } from '@/types/database';
 import { slugify } from '@/lib/utils';
 
+type ProductRow = Database['public']['Tables']['products']['Row'];
+type ProductInsert = Database['public']['Tables']['products']['Insert'];
+
 interface ProductFormProps {
-  product?: Product;
-  categories: Category[];
-  onSubmit: (data: ProductInsert | ProductUpdate) => Promise<void>;
+  product?: ProductRow | null;
+  categories: any[];
+  onSubmit: (data: ProductInsert | ProductRow) => Promise<void> | void;
   onCancel?: () => void;
 }
 
@@ -173,7 +176,7 @@ export default function ProductForm({ product, categories, onSubmit, onCancel }:
             id="status"
             required
             value={formData.status}
-            onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+            onChange={(e) => setFormData({ ...formData, status: e.target.value as 'active' | 'draft' | 'archived' })}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
           >
             <option value="active">Active</option>
