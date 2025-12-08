@@ -2,13 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Product, Category, ProductInsert } from '@/types/database';
+import { Product, Category, ProductInsert, ProductUpdate } from '@/types/database';
 import { slugify } from '@/lib/utils';
 
 interface ProductFormProps {
   product?: Product;
   categories: Category[];
-  onSubmit: (data: ProductInsert) => Promise<void>;
+  onSubmit: (data: ProductInsert | ProductUpdate) => Promise<void>;
   onCancel?: () => void;
 }
 

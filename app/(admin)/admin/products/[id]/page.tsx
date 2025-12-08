@@ -1,7 +1,7 @@
 import { createClient } from '@/lib/supabase/server';
 import { redirect, notFound } from 'next/navigation';
 import ProductForm from '@/components/Admin/ProductForm';
-import { ProductInsert } from '@/types/database';
+import { ProductUpdate } from '@/types/database';
 
 interface EditProductPageProps {
   params: Promise<{ id: string }>;
@@ -26,13 +26,13 @@ export default async function EditProductPage({ params }: EditProductPageProps) 
     .select('*')
     .order('name', { ascending: true });
 
-  async function handleSubmit(data: ProductInsert) {
+  async function handleSubmit(data: ProductUpdate) {
     'use server';
 
     const supabase = await createClient();
     const { error } = await supabase
       .from('products')
-      .update(data)
+      .update(data as ProductUpdate)
       .eq('id', id);
 
     if (error) {
