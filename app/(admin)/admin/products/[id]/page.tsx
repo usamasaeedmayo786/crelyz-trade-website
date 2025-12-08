@@ -7,11 +7,11 @@ import { Database } from '@/types/database';
 type ProductUpdate = Database['public']['Tables']['products']['Update'];
 
 interface EditProductPageProps {
-  params: { id: string }; // ❗ Fix params type
+  params: Promise<{ id: string }>;
 }
 
 export default async function EditProductPage({ params }: EditProductPageProps) {
-  const { id } = params; // ❗ No await needed
+  const { id } = await params;
   const supabase = await createClient();
 
   const { data: product } = await supabase
@@ -29,8 +29,6 @@ export default async function EditProductPage({ params }: EditProductPageProps) 
     .select('*')
     .order('name', { ascending: true });
 
-  // Correct server action syntax
-  'use server';
   async function handleSubmit(data: ProductUpdate) {
     const supabase = await createClient();
 
