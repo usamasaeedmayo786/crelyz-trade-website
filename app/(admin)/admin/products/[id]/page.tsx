@@ -30,7 +30,7 @@ export default async function EditProductPage({ params }: EditProductPageProps) 
     'use server';
 
     const supabase = await createClient();
-    // @ts-expect-error Supabase types for `products` are not wired correctly, but `data` matches the runtime schema
+    // @ts-ignore Supabase types for `products` are not wired correctly, but `data` matches the runtime schema
     const { error } = await supabase
       .from('products')
       .update(data)
