@@ -1,14 +1,17 @@
 import { createClient } from '@/lib/supabase/server';
 import { redirect, notFound } from 'next/navigation';
 import ProductForm from '@/components/Admin/ProductForm';
-import { ProductUpdate } from '@/types/database';
+import { Database } from '@/types/database';
+
+// Create a clean update type
+type ProductUpdate = Database['public']['Tables']['products']['Update'];
 
 interface EditProductPageProps {
-  params: Promise<{ id: string }>;
+  params: { id: string }; // ❗ Fix params type
 }
 
 export default async function EditProductPage({ params }: EditProductPageProps) {
-  const { id } = await params;
+  const { id } = params; // ❗ No await needed
   const supabase = await createClient();
 
   const { data: product } = await supabase
@@ -26,10 +29,11 @@ export default async function EditProductPage({ params }: EditProductPageProps) 
     .select('*')
     .order('name', { ascending: true });
 
+  // Correct server action syntax
+  'use server';
   async function handleSubmit(data: ProductUpdate) {
-    'use server';
-
     const supabase = await createClient();
+
     const { error } = await (supabase as any)
       .from('products')
       .update(data as any)
@@ -57,4 +61,3 @@ export default async function EditProductPage({ params }: EditProductPageProps) 
     </div>
   );
 }
-

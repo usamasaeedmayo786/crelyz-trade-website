@@ -1,14 +1,28 @@
 import { createClient } from '@/lib/supabase/server';
 import Link from 'next/link';
-import { Product } from '@/types/database';
+
+// A lightweight view type for this page.
+// We cast Supabase data into this shape so TypeScript stays happy.
+type ProductRow = {
+  id: string;
+  name: string;
+  sku: string;
+  status: string;
+  price: number | null;
+  images: string[] | null;
+  categories?: { name: string } | null;
+};
 
 export default async function ProductsManagementPage() {
   const supabase = await createClient();
 
-  const { data: products } = await supabase
+  const { data } = await supabase
     .from('products')
     .select('*, categories(name)')
     .order('created_at', { ascending: false });
+
+  // Ensure we always work with a typed array
+  const products = (data ?? []) as ProductRow[];
 
   const getStatusColor = (status: string) => {
     switch (status) {
@@ -36,7 +50,7 @@ export default async function ProductsManagementPage() {
           </Link>
         </div>
 
-        {products && products.length > 0 ? (
+        {products.length > 0 ? (
           <div className="bg-white shadow overflow-hidden sm:rounded-md">
             <ul className="divide-y divide-gray-200">
               {products.map((product) => (
@@ -57,21 +71,27 @@ export default async function ProductsManagementPage() {
                         </div>
                         <div className="ml-4">
                           <div className="flex items-center">
-                            <p className="text-sm font-medium text-gray-900">{product.name}</p>
-                            <span className={`ml-2 px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(product.status)}`}>
+                            <p className="text-sm font-medium text-gray-900">
+                              {product.name}
+                            </p>
+                            <span
+                              className={`ml-2 px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(
+                                product.status,
+                              )}`}
+                            >
                               {product.status}
                             </span>
                           </div>
                           <p className="text-sm text-gray-500">SKU: {product.sku}</p>
                           {product.categories && (
                             <p className="text-xs text-gray-400">
-                              {(product.categories as any).name}
+                              {product.categories.name}
                             </p>
                           )}
                         </div>
                       </div>
                       <div className="flex items-center space-x-4">
-                        {product.price && (
+                        {product.price !== null && (
                           <span className="text-sm font-semibold text-gray-900">
                             ${product.price.toFixed(2)}
                           </span>
@@ -104,4 +124,3 @@ export default async function ProductsManagementPage() {
     </div>
   );
 }
-
