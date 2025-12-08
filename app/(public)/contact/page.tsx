@@ -6,7 +6,8 @@ export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    message: '',
+    phone: '',
+    comment: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -23,7 +24,10 @@ export default function ContactPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          ...formData,
+          name: formData.name || 'Contact Form Submission',
+          email: formData.email,
+          phone: formData.phone || null,
+          message: formData.comment || 'Contact form submission',
           company: null,
           product_id: null,
         }),
@@ -37,7 +41,8 @@ export default function ContactPage() {
       setFormData({
         name: '',
         email: '',
-        message: '',
+        phone: '',
+        comment: '',
       });
     } catch (error) {
       setSubmitStatus('error');
@@ -47,32 +52,48 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-lg shadow-md p-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-6">Contact Us</h1>
-          <p className="text-gray-700 mb-8">
-            Have a question or need assistance? Fill out the form below and we'll get back to you as soon as possible.
+    <div className="min-h-screen bg-white py-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header Section */}
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            We Are Here To Connect!
+          </h1>
+          <p className="text-lg text-gray-700 max-w-3xl mx-auto">
+            We're here to connect. Whether you're a brand looking for distribution, a retailer exploring partnerships, or a client in need of support — our team at Crelyz Trade Inc is ready to assist. Write us at{' '}
+            <a 
+              href="mailto:crelyztradeinc@outlook.com" 
+              className="text-blue-600 hover:text-blue-700 underline"
+            >
+              crelyztradeinc@outlook.com
+            </a>
           </p>
+        </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+        {/* Contact Form Section */}
+        <div className="bg-white border border-gray-200 rounded-lg shadow-sm p-8 md:p-12">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-8 text-center">
+            Contact Us For Business Queries!
+          </h2>
+
+          <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-                Name *
+                Name
               </label>
               <input
                 type="text"
                 id="name"
-                required
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Your name"
               />
             </div>
 
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                Email *
+                Email<span className="text-red-500 ml-1">*</span>
               </label>
               <input
                 type="email"
@@ -80,22 +101,36 @@ export default function ContactPage() {
                 required
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="your.email@example.com"
               />
             </div>
 
             <div>
-              <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                Message *
+              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                Phone number
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="Your phone number"
+              />
+            </div>
+
+            <div>
+              <label htmlFor="comment" className="block text-sm font-medium text-gray-700 mb-2">
+                Comment
               </label>
               <textarea
-                id="message"
-                required
+                id="comment"
                 rows={6}
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="Tell us how we can help you..."
+                value={formData.comment}
+                onChange={(e) => setFormData({ ...formData, comment: e.target.value })}
+                className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none"
+                placeholder="Your message or comment..."
               />
             </div>
 
@@ -114,9 +149,9 @@ export default function ContactPage() {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="w-full bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed font-semibold"
+              className="w-full bg-gray-900 text-white py-3 px-6 rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed font-semibold text-base transition-colors"
             >
-              {isSubmitting ? 'Sending...' : 'Send Message'}
+              {isSubmitting ? 'Sending...' : 'Send'}
             </button>
           </form>
         </div>
