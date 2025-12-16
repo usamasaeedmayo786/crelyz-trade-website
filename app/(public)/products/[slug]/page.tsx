@@ -99,23 +99,23 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 p-6 lg:p-12">
+        <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 p-6 lg:p-10">
             {/* Product Images Section */}
             <div className="space-y-4">
               {/* Main Image */}
-              <div className="relative aspect-square w-full overflow-hidden bg-gray-100 rounded-lg group">
+              <div className="relative aspect-square w-full overflow-hidden bg-white border border-gray-200 rounded-lg group p-4">
                 {mainImage ? (
                   <ProductImage
                     src={mainImage}
                     alt={product.name}
                     fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="object-contain group-hover:scale-105 transition-transform duration-300"
                     priority
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 ) : (
-                  <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gray-500">
+                  <div className="w-full h-full flex items-center justify-center bg-gray-50 text-gray-500">
                     <span>No image available</span>
                   </div>
                 )}
@@ -127,13 +127,13 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
                   {otherImages.map((image: string, index: number) => (
                     <div 
                       key={index} 
-                      className="relative aspect-square w-full overflow-hidden bg-gray-100 rounded-md cursor-pointer hover:ring-2 ring-blue-500 transition-all"
+                      className="relative aspect-square w-full overflow-hidden bg-white border border-gray-200 rounded-md cursor-pointer hover:border-blue-500 hover:ring-2 ring-blue-500 transition-all p-2"
                     >
                       <ProductImage
                         src={image}
                         alt={`${product.name} ${index + 2}`}
                         fill
-                        className="object-cover"
+                        className="object-contain"
                         sizes="(max-width: 768px) 25vw, 12.5vw"
                       />
                     </div>

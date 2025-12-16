@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useMemo } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useSearchParams, useRouter } from 'next/navigation';
 import ProductCard from '@/components/ProductCard';
 import CatalogFilter from '@/components/CatalogFilter';
 import { Product, Category } from '@/types/database';
@@ -19,6 +19,7 @@ const categoryDescriptions: Record<string, string> = {
 
 export default function ProductsPage() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const [products, setProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
@@ -31,6 +32,24 @@ export default function ProductsPage() {
     min: null,
     max: null,
   });
+
+  // Watch for URL changes and update selected category
+  useEffect(() => {
+    const categoryParam = searchParams.get('category');
+    setSelectedCategory(categoryParam);
+  }, [searchParams]);
+
+  // Update URL when category changes programmatically
+  const handleCategoryChange = (categoryId: string | null) => {
+    setSelectedCategory(categoryId);
+    const params = new URLSearchParams(searchParams.toString());
+    if (categoryId) {
+      params.set('category', categoryId);
+    } else {
+      params.delete('category');
+    }
+    router.push(`/products?${params.toString()}`);
+  };
 
   useEffect(() => {
     fetchCategories();
@@ -148,7 +167,7 @@ export default function ProductsPage() {
   }, [products, availability, priceRange, sortBy]);
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Category Header */}
         {selectedCategoryData ? (
@@ -167,7 +186,7 @@ export default function ProductsPage() {
 
         <CatalogFilter
           categories={categories}
-          onCategoryChange={setSelectedCategory}
+          onCategoryChange={handleCategoryChange}
           onSortChange={setSortBy}
           onAvailabilityChange={setAvailability}
           onPriceRangeChange={(min, max) => setPriceRange({ min, max })}
@@ -181,14 +200,15 @@ export default function ProductsPage() {
             <p className="text-gray-500">Loading products...</p>
           </div>
         ) : filteredAndSortedProducts.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {filteredAndSortedProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>
         ) : (
-          <div className="text-center py-12 bg-white">
-            <p className="text-gray-500">No products found matching your criteria.</p>
+          <div className="text-center py-16 bg-white rounded-lg border border-gray-200">
+            <p className="text-gray-500 text-lg">No products found matching your criteria.</p>
+            <p className="text-gray-400 text-sm mt-2">Try adjusting your filters or browse all products.</p>
           </div>
         )}
       </div>

@@ -115,10 +115,10 @@ export default async function HomePage() {
       </section>
 
       {/* Proven Bestsellers Section - Right after hero */}
-      <section className="py-12 bg-gray-50">
+      <section className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-8">Proven bestsellers</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mb-8">
             {bestsellersArray.length > 0 ? (
               bestsellersArray.map((product) => (
                 <ProductCard key={product.id} product={product} />
@@ -186,9 +186,9 @@ export default async function HomePage() {
           <div className="text-center">
             <Link
               href="/products"
-              className="inline-block border border-gray-300 bg-gray-100 text-gray-900 px-8 py-3 rounded-md hover:bg-gray-200 transition-colors font-medium"
+              className="inline-block border-2 border-gray-300 bg-white text-gray-900 px-8 py-3 rounded-md hover:bg-gray-50 hover:border-gray-400 transition-all font-medium text-sm"
             >
-              View all
+              View all products
             </Link>
           </div>
         </div>
@@ -198,7 +198,7 @@ export default async function HomePage() {
       <section className="py-16 bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-white mb-8">Shop our top categories</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
             {topCategoriesArray.length > 0 ? (
               topCategoriesArray.map((category) => {
                 // Category images matching the Shopify design
@@ -214,17 +214,17 @@ export default async function HomePage() {
                   <Link
                     key={category.id}
                     href={`/products?category=${category.id}`}
-                    className="bg-white rounded-lg overflow-hidden hover:shadow-xl transition-shadow group"
+                    className="bg-white rounded-lg overflow-hidden hover:shadow-lg border border-gray-200 hover:border-gray-300 transition-all group"
                   >
-                    <div className="aspect-w-16 aspect-h-9 w-full h-48 bg-gray-200 overflow-hidden">
+                    <div className="aspect-w-16 aspect-h-9 w-full h-44 bg-gray-50 overflow-hidden p-3">
                       <img
                         src={categoryImages[category.slug] || 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800'}
                         alt={category.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
                       />
                     </div>
-                    <div className="p-4 bg-white">
-                      <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
+                    <div className="p-4 bg-white border-t border-gray-100">
+                      <h3 className="text-base font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">
                         {category.name} →
                       </h3>
                     </div>
@@ -281,10 +281,10 @@ export default async function HomePage() {
       </section>
 
       {/* New Arrivals Section */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">New Arrivals</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {newArrivalsArray.length > 0 ? (
               newArrivalsArray.map((product) => (
                 <ProductCard key={product.id} product={product} />
