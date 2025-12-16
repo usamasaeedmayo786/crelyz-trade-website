@@ -61,10 +61,22 @@ export default function ProductsPage() {
       const response = await fetch(`/api/products?${params.toString()}`);
       if (response.ok) {
         const data = await response.json();
-        setProducts(data);
+        // Ensure we only set products with valid images
+        const validProducts = (data || []).filter((p: Product) => 
+          p.images && 
+          Array.isArray(p.images) && 
+          p.images.length > 0 && 
+          p.images[0] && 
+          p.images[0].trim() !== ''
+        );
+        setProducts(validProducts);
+      } else {
+        console.error('Failed to fetch products:', response.statusText);
+        setProducts([]);
       }
     } catch (error) {
       console.error('Error fetching products:', error);
+      setProducts([]);
     } finally {
       setLoading(false);
     }

@@ -10,58 +10,65 @@ interface ProductDetailPageProps {
 }
 
 export async function generateMetadata({ params }: ProductDetailPageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const supabase = await createClient();
+  try {
+    const { slug } = await params;
+    const supabase = await createClient();
 
-  const { data: product } = await (supabase as any)
-    .from('products')
-    .select('name, short_description, images')
-    .eq('slug', slug)
-    .eq('status', 'active')
-    .single();
+    const { data: product } = await (supabase as any)
+      .from('products')
+      .select('name, short_description, images')
+      .eq('slug', slug)
+      .eq('status', 'active')
+      .single();
 
-  if (!product) {
+    if (!product) {
+      return {
+        title: 'Product Not Found - Crelyz Trade Inc.',
+      };
+    }
+
     return {
-      title: 'Product Not Found',
+      title: `${product.name} - Crelyz Trade Inc.`,
+      description: product.short_description || product.name,
+      openGraph: {
+        title: product.name,
+        description: product.short_description || product.name,
+        images: product.images && product.images.length > 0 ? [product.images[0]] : [],
+      },
+    };
+  } catch (error) {
+    return {
+      title: 'Product - Crelyz Trade Inc.',
     };
   }
-
-  return {
-    title: `${product.name} - Crelyz Trade Inc.`,
-    description: product.short_description || product.name,
-    openGraph: {
-      title: product.name,
-      description: product.short_description || product.name,
-      images: product.images && product.images.length > 0 ? [product.images[0]] : [],
-    },
-  };
 }
 
 export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
-  const { slug } = await params;
-  const supabase = await createClient();
+  try {
+    const { slug } = await params;
+    const supabase = await createClient();
 
-  const { data: product, error } = await (supabase as any)
-    .from('products')
-    .select('*, categories(*)')
-    .eq('slug', slug)
-    .eq('status', 'active')
-    .single();
+    const { data: product, error } = await (supabase as any)
+      .from('products')
+      .select('*, categories(*)')
+      .eq('slug', slug)
+      .eq('status', 'active')
+      .single();
 
-  if (error || !product) {
-    console.error('Error fetching product:', error);
-    notFound();
-  }
+    if (error || !product) {
+      console.error('Error fetching product:', error);
+      notFound();
+    }
 
-  // Don't show products without images
-  if (!product.images || !Array.isArray(product.images) || product.images.length === 0 || !product.images[0]) {
-    notFound();
-  }
+    // Don't show products without images
+    if (!product.images || !Array.isArray(product.images) || product.images.length === 0 || !product.images[0] || !product.images[0].trim()) {
+      notFound();
+    }
 
-  const mainImage = product.images[0];
-  const otherImages = product.images.slice(1);
+    const mainImage = product.images[0];
+    const otherImages = product.images.slice(1);
 
-  return (
+    return (
     <div className="min-h-screen bg-gray-50">
       {/* Breadcrumb Navigation */}
       <div className="bg-white border-b border-gray-200">
@@ -312,5 +319,9 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
         )}
       </div>
     </div>
-  );
+    );
+  } catch (error) {
+    console.error('Error in ProductDetailPage:', error);
+    notFound();
+  }
 }
