@@ -51,84 +51,76 @@ export default function AskForPriceForm() {
   };
 
   return (
-    <div className="bg-white rounded-lg shadow-lg p-8 max-w-2xl mx-auto">
-      <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Ask For Better Price</h2>
-      <p className="text-center text-gray-600 mb-6">Looking for wholesale pricing or bulk discounts? Contact us for a custom quote.</p>
+    <div className="bg-gray-800 rounded-lg p-8 max-w-2xl mx-auto">
+      <h2 className="text-3xl font-bold text-white mb-6 text-center">Ask For Better Price</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
-            Name
-          </label>
-          <input
-            type="text"
-            id="name"
-            required
-            value={formData.name}
-            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            placeholder="Your name"
-          />
+        {/* First Row: Name and Email side by side */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <input
+              type="text"
+              id="name"
+              required
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              className="w-full px-4 py-3 bg-transparent border border-white rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white"
+              placeholder="Name"
+            />
+          </div>
+          <div>
+            <input
+              type="email"
+              id="email"
+              required
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+              className="w-full px-4 py-3 bg-transparent border border-white rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white"
+              placeholder="Email *"
+            />
+          </div>
         </div>
 
+        {/* Second Row: Phone number */}
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-            Email *
-          </label>
-          <input
-            type="email"
-            id="email"
-            required
-            value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            placeholder="your.email@example.com"
-          />
-        </div>
-
-        <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-            Phone number
-          </label>
           <input
             type="tel"
             id="phone"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            placeholder="(123) 456-7890"
+            className="w-full px-4 py-3 bg-transparent border border-white rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white"
+            placeholder="Phone number"
           />
         </div>
 
+        {/* Third Row: Comment textarea */}
         <div>
-          <label htmlFor="comment" className="block text-sm font-medium text-gray-700 mb-2">
-            Comment
-          </label>
           <textarea
             id="comment"
             rows={4}
             value={formData.comment}
             onChange={(e) => setFormData({ ...formData, comment: e.target.value })}
-            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            placeholder="Tell us about your requirements..."
+            className="w-full px-4 py-3 bg-transparent border border-white rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white resize-none"
+            placeholder="Comment"
           />
         </div>
 
         {submitStatus === 'success' && (
-          <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-md">
+          <div className="bg-green-900 border border-green-700 text-green-100 px-4 py-3 rounded-md">
             Thank you! We'll get back to you with a better price soon.
           </div>
         )}
 
         {submitStatus === 'error' && (
-          <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-md">
+          <div className="bg-red-900 border border-red-700 text-red-100 px-4 py-3 rounded-md">
             There was an error submitting your request. Please try again.
           </div>
         )}
 
+        {/* Send Button */}
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed font-semibold text-lg"
+          className="w-full bg-white text-gray-900 py-3 px-6 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 disabled:opacity-50 disabled:cursor-not-allowed font-semibold text-lg transition-colors"
         >
           {isSubmitting ? 'Sending...' : 'Send'}
         </button>

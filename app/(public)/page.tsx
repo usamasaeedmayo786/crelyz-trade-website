@@ -361,7 +361,7 @@ export default async function HomePage() {
       </section>
 
       {/* Ask For Better Price Section */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-16 bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <AskForPriceForm />
         </div>

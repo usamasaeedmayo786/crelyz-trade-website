@@ -6,6 +6,17 @@ import ProductCard from '@/components/ProductCard';
 import CatalogFilter from '@/components/CatalogFilter';
 import { Product, Category } from '@/types/database';
 
+// Category descriptions mapping
+const categoryDescriptions: Record<string, string> = {
+  'kitchen': 'We provide all kinds of kitchen essentials in Canada, available on demand. From cookware to modern kitchen setups, we bring everything you need for a functional and stylish kitchen.',
+  'furniture': 'Discover our wide range of furniture collections in Canada. From modern living room sets to elegant dining furniture, we offer quality pieces that combine style and comfort.',
+  'home-appliances': 'Find the best home appliances in Canada. We offer a comprehensive selection of household appliances to make your home more efficient and comfortable.',
+  'tools': 'Professional and DIY tools available in Canada. From power tools to hand tools, we provide everything you need for your projects.',
+  'fitness': 'Transform your fitness journey with our range of fitness equipment in Canada. From home gym essentials to professional-grade equipment.',
+  'wellness': 'Enhance your well-being with our wellness products available in Canada. Quality products for a healthier lifestyle.',
+  'office': 'Complete your office setup with our office furniture and supplies in Canada. Ergonomic solutions for productive workspaces.',
+};
+
 export default function ProductsPage() {
   const searchParams = useSearchParams();
   const [products, setProducts] = useState<Product[]>([]);
@@ -14,7 +25,7 @@ export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(
     searchParams.get('category')
   );
-  const [sortBy, setSortBy] = useState<string>('featured');
+  const [sortBy, setSortBy] = useState<string>('best_selling');
   const [availability, setAvailability] = useState<string>('');
   const [priceRange, setPriceRange] = useState<{ min: number | null; max: number | null }>({
     min: null,
@@ -58,6 +69,12 @@ export default function ProductsPage() {
       setLoading(false);
     }
   };
+
+  // Get selected category details
+  const selectedCategoryData = useMemo(() => {
+    if (!selectedCategory) return null;
+    return categories.find(cat => cat.id === selectedCategory);
+  }, [selectedCategory, categories]);
 
   // Filter and sort products
   const filteredAndSortedProducts = useMemo(() => {
@@ -114,7 +131,20 @@ export default function ProductsPage() {
   return (
     <div className="min-h-screen bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">Products</h1>
+        {/* Category Header */}
+        {selectedCategoryData ? (
+          <div className="mb-8">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+              {selectedCategoryData.name}
+            </h1>
+            <p className="text-gray-600 text-lg max-w-3xl">
+              {categoryDescriptions[selectedCategoryData.slug] || 
+               `Explore our ${selectedCategoryData.name.toLowerCase()} collection. Quality products available on demand in Canada.`}
+            </p>
+          </div>
+        ) : (
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-8">Products</h1>
+        )}
 
         <CatalogFilter
           categories={categories}
@@ -124,6 +154,7 @@ export default function ProductsPage() {
           onPriceRangeChange={(min, max) => setPriceRange({ min, max })}
           selectedCategory={selectedCategory}
           productCount={filteredAndSortedProducts.length}
+          products={products}
         />
 
         {loading ? (
@@ -145,4 +176,3 @@ export default function ProductsPage() {
     </div>
   );
 }
-

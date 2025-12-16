@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import Link from "next/link";
+import Image from "next/image";
 import { createClient } from '@/lib/supabase/server';
 import CategoriesDropdown from '@/components/CategoriesDropdown';
 
@@ -71,32 +72,40 @@ export default async function RootLayout({
           </div>
         </nav>
         <main>{children}</main>
-        <footer className="bg-gray-50 border-t border-gray-200 mt-16">
+        <footer className="bg-gray-900 text-white border-t border-gray-800 mt-16">
           <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-              <div>
-                <h3 className="font-semibold text-gray-900 mb-4">Quick links</h3>
-                <ul className="space-y-2 text-gray-600">
-                  <li><Link href="/products" className="hover:text-gray-900">Search</Link></li>
-                  <li><Link href="/about" className="hover:text-gray-900">About Us</Link></li>
-                  <li><Link href="/contact" className="hover:text-gray-900">Contact</Link></li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="font-semibold text-gray-900 mb-4">Payment methods</h3>
-                <ul className="space-y-2 text-gray-600">
-                  <li>PayPal</li>
-                </ul>
-              </div>
-              <div>
-                <h3 className="font-semibold text-gray-900 mb-4">Privacy</h3>
-                <ul className="space-y-2 text-gray-600">
-                  <li><Link href="/privacy" className="hover:text-gray-900">Privacy Policy</Link></li>
-                </ul>
+            {/* Quick Links Section */}
+            <div className="text-center mb-8">
+              <h3 className="font-semibold text-white mb-6">Quick links</h3>
+              <div className="flex justify-center items-center space-x-6 flex-wrap gap-4">
+                <Link href="/products" className="text-white hover:text-gray-300 transition-colors">
+                  Search
+                </Link>
+                <Link href="/privacy" className="text-white hover:text-gray-300 transition-colors">
+                  Privacy Policy
+                </Link>
+                <Link href="/about" className="text-white hover:text-gray-300 transition-colors">
+                  About Us
+                </Link>
               </div>
             </div>
-            <div className="text-center text-gray-600 border-t border-gray-200 pt-8">
-              <p>&copy; {new Date().getFullYear()}, Crelyz Trade Inc.</p>
+
+            {/* PayPal Logo */}
+            <div className="flex justify-center mb-8">
+              <div className="bg-white rounded-lg p-3 inline-block">
+                <Image 
+                  src="https://www.paypalobjects.com/webstatic/mktg/logo/pp_cc_mark_111x69.jpg" 
+                  alt="PayPal" 
+                  width={111}
+                  height={69}
+                  className="h-8 w-auto"
+                />
+              </div>
+            </div>
+
+            {/* Copyright */}
+            <div className="text-left text-sm text-white border-t border-gray-800 pt-6">
+              <p>&copy; {new Date().getFullYear()}, Crelyz Trade Inc. Powered by Shopify <Link href="/privacy" className="hover:text-gray-300 underline">Privacy policy</Link></p>
             </div>
           </div>
         </footer>
