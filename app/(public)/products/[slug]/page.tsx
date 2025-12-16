@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import { createClient } from '@/lib/supabase/server';
 import EnquiryForm from '@/components/EnquiryForm';
 import Link from 'next/link';
-import Image from 'next/image';
+import ProductImage from '@/components/ProductImage';
 import { Metadata } from 'next';
 
 interface ProductDetailPageProps {
@@ -105,16 +105,13 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             <div className="space-y-4">
               {/* Main Image */}
               <div className="relative aspect-square w-full overflow-hidden bg-gray-100 rounded-lg group">
-                <Image
+                <ProductImage
                   src={mainImage}
                   alt={product.name}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
                   priority
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = 'https://via.placeholder.com/800x800?text=Product+Image';
-                  }}
                 />
               </div>
 
@@ -126,15 +123,12 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
                       key={index} 
                       className="relative aspect-square w-full overflow-hidden bg-gray-100 rounded-md cursor-pointer hover:ring-2 ring-blue-500 transition-all"
                     >
-                      <Image
+                      <ProductImage
                         src={image}
                         alt={`${product.name} ${index + 2}`}
                         fill
                         className="object-cover"
                         sizes="(max-width: 768px) 25vw, 12.5vw"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = 'https://via.placeholder.com/200x200?text=Image';
-                        }}
                       />
                     </div>
                   ))}
