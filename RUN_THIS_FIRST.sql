@@ -28,7 +28,7 @@ SELECT
   50,
   'active',
   c.id,
-  ARRAY['https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=800&fit=crop']::TEXT[]
+  ARRAY['https://m.media-amazon.com/images/I/813XaWAXw4L._AC_SL1500_.jpg']::TEXT[]
 FROM categories c WHERE c.slug = 'fitness'
 ON CONFLICT (slug) DO UPDATE SET images = EXCLUDED.images, price = EXCLUDED.price, stock_quantity = EXCLUDED.stock_quantity;
 
@@ -43,7 +43,7 @@ SELECT
   30,
   'active',
   c.id,
-  ARRAY['https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=800&fit=crop']::TEXT[]
+  ARRAY['https://m.media-amazon.com/images/I/71CLBCp28aL._AC_SL1500_.jpg']::TEXT[]
 FROM categories c WHERE c.slug = 'fitness'
 ON CONFLICT (slug) DO UPDATE SET images = EXCLUDED.images, price = EXCLUDED.price, stock_quantity = EXCLUDED.stock_quantity;
 
@@ -58,7 +58,7 @@ SELECT
   25,
   'active',
   c.id,
-  ARRAY['https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=800&fit=crop']::TEXT[]
+  ARRAY['https://m.media-amazon.com/images/I/71115-n045L._AC_SL1500_.jpg']::TEXT[]
 FROM categories c WHERE c.slug = 'fitness'
 ON CONFLICT (slug) DO UPDATE SET images = EXCLUDED.images, price = EXCLUDED.price, stock_quantity = EXCLUDED.stock_quantity;
 
@@ -73,7 +73,7 @@ SELECT
   40,
   'active',
   c.id,
-  ARRAY['https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=800&fit=crop']::TEXT[]
+  ARRAY['https://m.media-amazon.com/images/I/61ISdnXUVDL._AC_SL1500_.jpg']::TEXT[]
 FROM categories c WHERE c.slug = 'fitness'
 ON CONFLICT (slug) DO UPDATE SET images = EXCLUDED.images, price = EXCLUDED.price, stock_quantity = EXCLUDED.stock_quantity;
 
@@ -89,7 +89,7 @@ SELECT
   25,
   'active',
   c.id,
-  ARRAY['https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=800&fit=crop']::TEXT[]
+  ARRAY['https://m.media-amazon.com/images/I/71AIpF9ZhWL._AC_SL1500_.jpg']::TEXT[]
 FROM categories c WHERE c.slug = 'furniture'
 ON CONFLICT (slug) DO UPDATE SET images = EXCLUDED.images, price = EXCLUDED.price, stock_quantity = EXCLUDED.stock_quantity;
 
@@ -104,7 +104,7 @@ SELECT
   60,
   'active',
   c.id,
-  ARRAY['https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=800&fit=crop']::TEXT[]
+  ARRAY['https://m.media-amazon.com/images/I/71mAY-c1uCL._AC_SL1500_.jpg']::TEXT[]
 FROM categories c WHERE c.slug = 'furniture'
 ON CONFLICT (slug) DO UPDATE SET images = EXCLUDED.images, price = EXCLUDED.price, stock_quantity = EXCLUDED.stock_quantity;
 
@@ -119,7 +119,7 @@ SELECT
   35,
   'active',
   c.id,
-  ARRAY['https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=800&fit=crop']::TEXT[]
+  ARRAY['https://m.media-amazon.com/images/I/71+aWbyJ5XL._AC_SL1500_.jpg']::TEXT[]
 FROM categories c WHERE c.slug = 'furniture'
 ON CONFLICT (slug) DO UPDATE SET images = EXCLUDED.images, price = EXCLUDED.price, stock_quantity = EXCLUDED.stock_quantity;
 
@@ -134,7 +134,7 @@ SELECT
   45,
   'active',
   c.id,
-  ARRAY['https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=800&fit=crop']::TEXT[]
+  ARRAY['https://m.media-amazon.com/images/I/61zxkUnnF7L._AC_SL1500_.jpg']::TEXT[]
 FROM categories c WHERE c.slug = 'furniture'
 ON CONFLICT (slug) DO UPDATE SET images = EXCLUDED.images, price = EXCLUDED.price, stock_quantity = EXCLUDED.stock_quantity;
 
@@ -149,7 +149,7 @@ SELECT
   30,
   'active',
   c.id,
-  ARRAY['https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&h=800&fit=crop']::TEXT[]
+  ARRAY['https://m.media-amazon.com/images/I/71WbyJaQN+L._AC_SL1500_.jpg']::TEXT[]
 FROM categories c WHERE c.slug = 'furniture'
 ON CONFLICT (slug) DO UPDATE SET images = EXCLUDED.images, price = EXCLUDED.price, stock_quantity = EXCLUDED.stock_quantity;
 
@@ -165,7 +165,7 @@ SELECT
   70,
   'active',
   c.id,
-  ARRAY['https://images.unsplash.com/photo-1556910103-2c02749b6c16?w=800&h=800&fit=crop']::TEXT[]
+  ARRAY['https://m.media-amazon.com/images/I/71CLBCp28aL._AC_SL1500_.jpg']::TEXT[]
 FROM categories c WHERE c.slug = 'kitchen'
 ON CONFLICT (slug) DO UPDATE SET images = EXCLUDED.images, price = EXCLUDED.price, stock_quantity = EXCLUDED.stock_quantity;
 
@@ -180,7 +180,7 @@ SELECT
   40,
   'active',
   c.id,
-  ARRAY['https://images.unsplash.com/photo-1556911220-bff31c812dba?w=800&h=800&fit=crop']::TEXT[]
+  ARRAY['https://m.media-amazon.com/images/I/71CLBCp28aL._AC_SL1500_.jpg']::TEXT[]
 FROM categories c WHERE c.slug = 'kitchen'
 ON CONFLICT (slug) DO UPDATE SET images = EXCLUDED.images, price = EXCLUDED.price, stock_quantity = EXCLUDED.stock_quantity;
 
@@ -195,7 +195,7 @@ SELECT
   70,
   'active',
   c.id,
-  ARRAY['https://images.unsplash.com/photo-1556910103-2c02749b6c16?w=800&h=800&fit=crop']::TEXT[]
+  ARRAY['https://m.media-amazon.com/images/I/81NuDZfC+-L._AC_SL1500_.jpg']::TEXT[]
 FROM categories c WHERE c.slug = 'kitchen'
 ON CONFLICT (slug) DO UPDATE SET images = EXCLUDED.images, price = EXCLUDED.price, stock_quantity = EXCLUDED.stock_quantity;
 
@@ -241,7 +241,7 @@ SELECT
   80,
   'active',
   c.id,
-  ARRAY['https://images.unsplash.com/photo-1556910103-2c02749b6c16?w=800&h=800&fit=crop']::TEXT[]
+  ARRAY['https://m.media-amazon.com/images/I/71CLBCp28aL._AC_SL1500_.jpg']::TEXT[]
 FROM categories c WHERE c.slug = 'home-appliances'
 ON CONFLICT (slug) DO UPDATE SET images = EXCLUDED.images, price = EXCLUDED.price, stock_quantity = EXCLUDED.stock_quantity;
 
@@ -256,7 +256,7 @@ SELECT
   90,
   'active',
   c.id,
-  ARRAY['https://images.unsplash.com/photo-1556910103-2c02749b6c16?w=800&h=800&fit=crop']::TEXT[]
+  ARRAY['https://m.media-amazon.com/images/I/71CLBCp28aL._AC_SL1500_.jpg']::TEXT[]
 FROM categories c WHERE c.slug = 'home-appliances'
 ON CONFLICT (slug) DO UPDATE SET images = EXCLUDED.images, price = EXCLUDED.price, stock_quantity = EXCLUDED.stock_quantity;
 
@@ -271,7 +271,7 @@ SELECT
   50,
   'active',
   c.id,
-  ARRAY['https://images.unsplash.com/photo-1556910103-2c02749b6c16?w=800&h=800&fit=crop']::TEXT[]
+  ARRAY['https://m.media-amazon.com/images/I/71CLBCp28aL._AC_SL1500_.jpg']::TEXT[]
 FROM categories c WHERE c.slug = 'home-appliances'
 ON CONFLICT (slug) DO UPDATE SET images = EXCLUDED.images, price = EXCLUDED.price, stock_quantity = EXCLUDED.stock_quantity;
 
@@ -286,7 +286,7 @@ SELECT
   35,
   'active',
   c.id,
-  ARRAY['https://images.unsplash.com/photo-1556910103-2c02749b6c16?w=800&h=800&fit=crop']::TEXT[]
+  ARRAY['https://m.media-amazon.com/images/I/71CLBCp28aL._AC_SL1500_.jpg']::TEXT[]
 FROM categories c WHERE c.slug = 'home-appliances'
 ON CONFLICT (slug) DO UPDATE SET images = EXCLUDED.images, price = EXCLUDED.price, stock_quantity = EXCLUDED.stock_quantity;
 
@@ -301,7 +301,7 @@ SELECT
   25,
   'active',
   c.id,
-  ARRAY['https://images.unsplash.com/photo-1556910103-2c02749b6c16?w=800&h=800&fit=crop']::TEXT[]
+  ARRAY['https://m.media-amazon.com/images/I/71CLBCp28aL._AC_SL1500_.jpg']::TEXT[]
 FROM categories c WHERE c.slug = 'home-appliances'
 ON CONFLICT (slug) DO UPDATE SET images = EXCLUDED.images, price = EXCLUDED.price, stock_quantity = EXCLUDED.stock_quantity;
 
@@ -317,7 +317,7 @@ SELECT
   60,
   'active',
   c.id,
-  ARRAY['https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=800&fit=crop']::TEXT[]
+  ARRAY['https://m.media-amazon.com/images/I/71CLBCp28aL._AC_SL1500_.jpg']::TEXT[]
 FROM categories c WHERE c.slug = 'office'
 ON CONFLICT (slug) DO UPDATE SET images = EXCLUDED.images, price = EXCLUDED.price, stock_quantity = EXCLUDED.stock_quantity;
 
@@ -332,7 +332,7 @@ SELECT
   40,
   'active',
   c.id,
-  ARRAY['https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=800&fit=crop']::TEXT[]
+  ARRAY['https://m.media-amazon.com/images/I/71CLBCp28aL._AC_SL1500_.jpg']::TEXT[]
 FROM categories c WHERE c.slug = 'office'
 ON CONFLICT (slug) DO UPDATE SET images = EXCLUDED.images, price = EXCLUDED.price, stock_quantity = EXCLUDED.stock_quantity;
 
@@ -347,7 +347,7 @@ SELECT
   30,
   'active',
   c.id,
-  ARRAY['https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=800&fit=crop']::TEXT[]
+  ARRAY['https://m.media-amazon.com/images/I/71CLBCp28aL._AC_SL1500_.jpg']::TEXT[]
 FROM categories c WHERE c.slug = 'office'
 ON CONFLICT (slug) DO UPDATE SET images = EXCLUDED.images, price = EXCLUDED.price, stock_quantity = EXCLUDED.stock_quantity;
 
@@ -362,7 +362,7 @@ SELECT
   50,
   'active',
   c.id,
-  ARRAY['https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=800&fit=crop']::TEXT[]
+  ARRAY['https://m.media-amazon.com/images/I/71CLBCp28aL._AC_SL1500_.jpg']::TEXT[]
 FROM categories c WHERE c.slug = 'office'
 ON CONFLICT (slug) DO UPDATE SET images = EXCLUDED.images, price = EXCLUDED.price, stock_quantity = EXCLUDED.stock_quantity;
 
@@ -377,7 +377,7 @@ SELECT
   45,
   'active',
   c.id,
-  ARRAY['https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=800&fit=crop']::TEXT[]
+  ARRAY['https://m.media-amazon.com/images/I/71CLBCp28aL._AC_SL1500_.jpg']::TEXT[]
 FROM categories c WHERE c.slug = 'office'
 ON CONFLICT (slug) DO UPDATE SET images = EXCLUDED.images, price = EXCLUDED.price, stock_quantity = EXCLUDED.stock_quantity;
 
@@ -392,7 +392,7 @@ SELECT
   70,
   'active',
   c.id,
-  ARRAY['https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=800&fit=crop']::TEXT[]
+  ARRAY['https://m.media-amazon.com/images/I/71CLBCp28aL._AC_SL1500_.jpg']::TEXT[]
 FROM categories c WHERE c.slug = 'office'
 ON CONFLICT (slug) DO UPDATE SET images = EXCLUDED.images, price = EXCLUDED.price, stock_quantity = EXCLUDED.stock_quantity;
 
