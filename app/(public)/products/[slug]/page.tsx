@@ -105,14 +105,20 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
             <div className="space-y-4">
               {/* Main Image */}
               <div className="relative aspect-square w-full overflow-hidden bg-gray-100 rounded-lg group">
-                <ProductImage
-                  src={mainImage}
-                  alt={product.name}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  priority
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                />
+                {mainImage ? (
+                  <ProductImage
+                    src={mainImage}
+                    alt={product.name}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    priority
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center bg-gray-200 text-gray-500">
+                    <span>No image available</span>
+                  </div>
+                )}
               </div>
 
               {/* Thumbnail Images */}
