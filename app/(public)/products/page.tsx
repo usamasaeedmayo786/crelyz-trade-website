@@ -78,7 +78,14 @@ export default function ProductsPage() {
 
   // Filter and sort products
   const filteredAndSortedProducts = useMemo(() => {
-    let filtered = [...products];
+    // First, filter out products without images
+    let filtered = products.filter((p) => 
+      p.images && 
+      Array.isArray(p.images) && 
+      p.images.length > 0 && 
+      p.images[0] && 
+      p.images[0].trim() !== ''
+    );
 
     // Filter by availability
     if (availability === 'in_stock') {

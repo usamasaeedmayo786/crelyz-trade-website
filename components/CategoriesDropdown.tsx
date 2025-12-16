@@ -11,13 +11,22 @@ interface CategoriesDropdownProps {
 export default function CategoriesDropdown({ categories }: CategoriesDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
 
-  // Close dropdown when clicking outside
+  // Close dropdown when clicking outside or on arrow button again
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setIsOpen(false);
+      const target = event.target as Node;
+      
+      // Don't close if clicking inside dropdown or button
+      if (
+        dropdownRef.current?.contains(target) ||
+        buttonRef.current?.contains(target)
+      ) {
+        return;
       }
+      
+      setIsOpen(false);
     };
 
     if (isOpen) {
@@ -33,16 +42,19 @@ export default function CategoriesDropdown({ categories }: CategoriesDropdownPro
     setIsOpen(!isOpen);
   };
 
+  const handleCategoryClick = () => {
+    setIsOpen(false);
+  };
+
   return (
     <div 
       className="relative" 
       ref={dropdownRef}
-      onMouseEnter={() => setIsOpen(true)} 
-      onMouseLeave={() => setIsOpen(false)}
     >
       <button 
+        ref={buttonRef}
         onClick={toggleDropdown}
-        className="text-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-white text-sm font-medium cursor-pointer"
+        className="text-gray-300 hover:text-white inline-flex items-center px-1 pt-1 border-b-2 border-transparent hover:border-white text-sm font-medium cursor-pointer transition-colors"
         aria-expanded={isOpen}
         aria-haspopup="true"
       >
@@ -64,7 +76,7 @@ export default function CategoriesDropdown({ categories }: CategoriesDropdownPro
                 key={category.id}
                 href={`/products?category=${category.id}`}
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
-                onClick={() => setIsOpen(false)}
+                onClick={handleCategoryClick}
               >
                 {category.name}
               </Link>
@@ -82,4 +94,3 @@ export default function CategoriesDropdown({ categories }: CategoriesDropdownPro
     </div>
   );
 }
-

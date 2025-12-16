@@ -148,13 +148,13 @@ export default function CatalogFilter({
                 <div className="flex gap-2">
                   <div className="flex-1">
                     <div className="relative">
-                      <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                      <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-700 font-medium">$</span>
                       <input
                         type="number"
                         placeholder="From"
                         value={priceMin}
                         onChange={(e) => setPriceMin(e.target.value)}
-                        className="w-full pl-7 pr-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-gray-500"
+                        className="w-full pl-7 pr-3 py-2.5 bg-white border-2 border-gray-300 rounded text-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
                         min="0"
                         step="0.01"
                       />
@@ -162,13 +162,13 @@ export default function CatalogFilter({
                   </div>
                   <div className="flex-1">
                     <div className="relative">
-                      <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                      <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-700 font-medium">$</span>
                       <input
                         type="number"
                         placeholder="To"
                         value={priceMax}
                         onChange={(e) => setPriceMax(e.target.value)}
-                        className="w-full pl-7 pr-3 py-2 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-gray-500"
+                        className="w-full pl-7 pr-3 py-2.5 bg-white border-2 border-gray-300 rounded text-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
                         min="0"
                         step="0.01"
                       />
@@ -254,25 +254,25 @@ export default function CatalogFilter({
               </div>
               <div className="flex gap-2">
                 <div className="flex-1 relative">
-                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-700 font-medium">$</span>
                   <input
                     type="number"
                     placeholder="From"
                     value={priceMin}
                     onChange={(e) => setPriceMin(e.target.value)}
-                    className="w-full pl-7 pr-3 py-2 border border-gray-300 rounded text-sm"
+                    className="w-full pl-7 pr-3 py-2.5 bg-white border-2 border-gray-300 rounded text-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
                     min="0"
                     step="0.01"
                   />
                 </div>
                 <div className="flex-1 relative">
-                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500">$</span>
+                  <span className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-700 font-medium">$</span>
                   <input
                     type="number"
                     placeholder="To"
                     value={priceMax}
                     onChange={(e) => setPriceMax(e.target.value)}
-                    className="w-full pl-7 pr-3 py-2 border border-gray-300 rounded text-sm"
+                    className="w-full pl-7 pr-3 py-2.5 bg-white border-2 border-gray-300 rounded text-sm text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
                     min="0"
                     step="0.01"
                   />

@@ -32,21 +32,29 @@ const blogPosts = [
 export default async function HomePage() {
   const supabase = await createClient();
   
-  // Fetch proven bestsellers (3 products)
-  const { data: bestsellers } = await (supabase as any)
+  // Fetch proven bestsellers (3 products) - only with images
+  const { data: allBestsellers } = await (supabase as any)
     .from('products')
     .select('*')
     .eq('status', 'active')
     .order('created_at', { ascending: false })
-    .limit(3);
+    .limit(10);
+  
+  const bestsellers = (allBestsellers || []).filter((p: Product) => 
+    p.images && Array.isArray(p.images) && p.images.length > 0 && p.images[0] && p.images[0].trim() !== ''
+  ).slice(0, 3);
 
-  // Fetch new arrivals (4 most recent products)
-  const { data: newArrivals } = await (supabase as any)
+  // Fetch new arrivals (4 most recent products) - only with images
+  const { data: allNewArrivals } = await (supabase as any)
     .from('products')
     .select('*')
     .eq('status', 'active')
     .order('created_at', { ascending: false })
-    .limit(4);
+    .limit(10);
+  
+  const newArrivals = (allNewArrivals || []).filter((p: Product) => 
+    p.images && Array.isArray(p.images) && p.images.length > 0 && p.images[0] && p.images[0].trim() !== ''
+  ).slice(0, 4);
 
   // Fetch specific categories for "Shop our top categories" section
   const { data: topCategories } = await (supabase as any)

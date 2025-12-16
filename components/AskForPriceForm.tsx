@@ -51,7 +51,7 @@ export default function AskForPriceForm() {
   };
 
   return (
-    <div className="bg-gray-800 rounded-lg p-8 max-w-2xl mx-auto">
+    <div className="bg-gray-800 rounded-lg p-8 max-w-2xl mx-auto border-2 border-gray-700">
       <h2 className="text-3xl font-bold text-white mb-6 text-center">Ask For Better Price</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         {/* First Row: Name and Email side by side */}
@@ -63,7 +63,7 @@ export default function AskForPriceForm() {
               required
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              className="w-full px-4 py-3 bg-transparent border border-white rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white"
+              className="w-full px-4 py-3 bg-gray-900 border-2 border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition-all text-base"
               placeholder="Name"
             />
           </div>
@@ -74,7 +74,7 @@ export default function AskForPriceForm() {
               required
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              className="w-full px-4 py-3 bg-transparent border border-white rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white"
+              className="w-full px-4 py-3 bg-gray-900 border-2 border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition-all text-base"
               placeholder="Email *"
             />
           </div>
@@ -87,7 +87,7 @@ export default function AskForPriceForm() {
             id="phone"
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-            className="w-full px-4 py-3 bg-transparent border border-white rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white"
+            className="w-full px-4 py-3 bg-gray-900 border-2 border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:border-white transition-all text-base"
             placeholder="Phone number"
           />
         </div>
@@ -99,20 +99,20 @@ export default function AskForPriceForm() {
             rows={4}
             value={formData.comment}
             onChange={(e) => setFormData({ ...formData, comment: e.target.value })}
-            className="w-full px-4 py-3 bg-transparent border border-white rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white resize-none"
+            className="w-full px-4 py-3 bg-gray-900 border-2 border-gray-600 rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-white focus:border-white resize-none transition-all text-base"
             placeholder="Comment"
           />
         </div>
 
         {submitStatus === 'success' && (
-          <div className="bg-green-900 border border-green-700 text-green-100 px-4 py-3 rounded-md">
-            Thank you! We'll get back to you with a better price soon.
+          <div className="bg-green-900 border-2 border-green-700 text-green-100 px-4 py-3 rounded-md font-medium">
+            ✓ Thank you! We'll get back to you with a better price soon.
           </div>
         )}
 
         {submitStatus === 'error' && (
-          <div className="bg-red-900 border border-red-700 text-red-100 px-4 py-3 rounded-md">
-            There was an error submitting your request. Please try again.
+          <div className="bg-red-900 border-2 border-red-700 text-red-100 px-4 py-3 rounded-md font-medium">
+            ✗ There was an error submitting your request. Please try again.
           </div>
         )}
 
@@ -120,7 +120,7 @@ export default function AskForPriceForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-white text-gray-900 py-3 px-6 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 disabled:opacity-50 disabled:cursor-not-allowed font-semibold text-lg transition-colors"
+          className="w-full bg-white text-gray-900 py-3 px-6 rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 disabled:opacity-50 disabled:cursor-not-allowed font-semibold text-lg transition-all shadow-lg hover:shadow-xl"
         >
           {isSubmitting ? 'Sending...' : 'Send'}
         </button>
@@ -128,4 +128,3 @@ export default function AskForPriceForm() {
     </div>
   );
 }
-

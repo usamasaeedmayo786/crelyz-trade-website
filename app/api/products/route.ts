@@ -28,7 +28,16 @@ export async function GET(request: NextRequest) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    return NextResponse.json(data || []);
+    // Filter out products without images
+    const productsWithImages = (data || []).filter((product: any) => 
+      product.images && 
+      Array.isArray(product.images) && 
+      product.images.length > 0 && 
+      product.images[0] && 
+      product.images[0].trim() !== ''
+    );
+
+    return NextResponse.json(productsWithImages);
   } catch (error) {
     return NextResponse.json(
       { error: 'Internal server error' },

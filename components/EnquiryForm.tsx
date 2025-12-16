@@ -53,14 +53,14 @@ export default function EnquiryForm({ product }: EnquiryFormProps) {
   };
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-2xl font-bold text-gray-900 mb-4">
+    <div className="bg-white p-6 md:p-8 rounded-lg shadow-lg border-2 border-gray-200">
+      <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-6">
         {product ? `Request Quote for ${product.name}` : 'Send Enquiry'}
       </h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-5">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-            Name *
+          <label htmlFor="name" className="block text-sm font-semibold text-gray-900 mb-2">
+            Name<span className="text-red-600 ml-1">*</span>
           </label>
           <input
             type="text"
@@ -68,12 +68,13 @@ export default function EnquiryForm({ product }: EnquiryFormProps) {
             required
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-4 py-3 bg-white border-2 border-gray-300 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-base"
+            placeholder="Enter your full name"
           />
         </div>
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-            Email *
+          <label htmlFor="email" className="block text-sm font-semibold text-gray-900 mb-2">
+            Email<span className="text-red-600 ml-1">*</span>
           </label>
           <input
             type="email"
@@ -81,11 +82,12 @@ export default function EnquiryForm({ product }: EnquiryFormProps) {
             required
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-4 py-3 bg-white border-2 border-gray-300 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-base"
+            placeholder="your.email@example.com"
           />
         </div>
         <div>
-          <label htmlFor="company" className="block text-sm font-medium text-gray-700 mb-1">
+          <label htmlFor="company" className="block text-sm font-semibold text-gray-900 mb-2">
             Company
           </label>
           <input
@@ -93,37 +95,38 @@ export default function EnquiryForm({ product }: EnquiryFormProps) {
             id="company"
             value={formData.company}
             onChange={(e) => setFormData({ ...formData, company: e.target.value })}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full px-4 py-3 bg-white border-2 border-gray-300 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all text-base"
+            placeholder="Your company name (optional)"
           />
         </div>
         <div>
-          <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
-            Message *
+          <label htmlFor="message" className="block text-sm font-semibold text-gray-900 mb-2">
+            Message<span className="text-red-600 ml-1">*</span>
           </label>
           <textarea
             id="message"
             required
-            rows={4}
+            rows={5}
             value={formData.message}
             onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            placeholder="Tell us about your requirements..."
+            className="w-full px-4 py-3 bg-white border-2 border-gray-300 rounded-md text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 resize-none transition-all text-base"
+            placeholder="Tell us about your requirements or questions..."
           />
         </div>
         {submitStatus === 'success' && (
-          <div className="bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-md">
-            Thank you! Your enquiry has been submitted successfully. We'll get back to you soon.
+          <div className="bg-green-50 border-2 border-green-300 text-green-900 px-4 py-3 rounded-md font-medium">
+            ✓ Thank you! Your enquiry has been submitted successfully. We'll get back to you soon.
           </div>
         )}
         {submitStatus === 'error' && (
-          <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-md">
-            There was an error submitting your enquiry. Please try again.
+          <div className="bg-red-50 border-2 border-red-300 text-red-900 px-4 py-3 rounded-md font-medium">
+            ✗ There was an error submitting your enquiry. Please try again.
           </div>
         )}
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed font-semibold text-base transition-all shadow-md hover:shadow-lg"
         >
           {isSubmitting ? 'Submitting...' : 'Submit Enquiry'}
         </button>
@@ -131,4 +134,3 @@ export default function EnquiryForm({ product }: EnquiryFormProps) {
     </div>
   );
 }
-
