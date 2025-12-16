@@ -21,6 +21,9 @@ export async function generateMetadata({ params }: ProductDetailPageProps): Prom
       .eq('status', 'active')
       .single();
 
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://crelyztradeinc.com';
+    const canonicalUrl = `${siteUrl.replace(/\/$/, '')}/products/${slug}`;
+
     if (!product) {
       return {
         title: 'Product Not Found - Crelyz Trade Inc.',
@@ -30,10 +33,14 @@ export async function generateMetadata({ params }: ProductDetailPageProps): Prom
     return {
       title: `${product.name} - Crelyz Trade Inc.`,
       description: product.short_description || product.name,
+      alternates: {
+        canonical: canonicalUrl,
+      },
       openGraph: {
         title: product.name,
         description: product.short_description || product.name,
         images: product.images && product.images.length > 0 ? [product.images[0]] : [],
+        url: canonicalUrl,
       },
     };
   } catch (error) {

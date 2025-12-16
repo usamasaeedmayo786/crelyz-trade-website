@@ -5,9 +5,17 @@ import Image from "next/image";
 import { createClient } from '@/lib/supabase/server';
 import CategoriesDropdown from '@/components/CategoriesDropdown';
 
+// Get the canonical URL from environment variable or default
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://crelyztradeinc.com';
+const canonicalUrl = siteUrl.replace(/\/$/, ''); // Remove trailing slash
+
 export const metadata: Metadata = {
   title: "Crelyz Trade Inc. - Your Best Trade Partner Globally",
   description: "Welcome to Crelyz. Your Best Trade Partner Globally. Outstanding service, exclusive pricing, and industry expertise.",
+  metadataBase: new URL(canonicalUrl),
+  alternates: {
+    canonical: canonicalUrl,
+  },
 };
 
 export default async function RootLayout({
