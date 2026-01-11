@@ -24,6 +24,9 @@ const nextConfig: NextConfig = {
         hostname: 'm.media-amazon.com',
       },
     ],
+    // Optimize image loading performance
+    minimumCacheTTL: 60, // Cache images for 60 seconds
+    formats: ['image/avif', 'image/webp'], // Use modern formats
   },
 };
 

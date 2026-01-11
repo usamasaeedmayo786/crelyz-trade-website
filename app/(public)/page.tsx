@@ -119,8 +119,8 @@ export default async function HomePage() {
           <h2 className="text-3xl font-bold text-gray-900 mb-8">Proven bestsellers</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mb-8">
             {bestsellersArray.length > 0 ? (
-              bestsellersArray.map((product) => (
-                <ProductCard key={product.id} product={product} />
+              bestsellersArray.map((product, index) => (
+                <ProductCard key={product.id} product={product} priority={index < 3} />
               ))
             ) : (
               <>
@@ -285,8 +285,8 @@ export default async function HomePage() {
           <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">New Arrivals</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
             {newArrivalsArray.length > 0 ? (
-              newArrivalsArray.map((product) => (
-                <ProductCard key={product.id} product={product} />
+              newArrivalsArray.map((product, index) => (
+                <ProductCard key={product.id} product={product} priority={index < 4} />
               ))
             ) : (
               <>

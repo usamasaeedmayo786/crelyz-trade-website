@@ -9,9 +9,10 @@ interface ProductCardProps {
   product: Product;
   isOnSale?: boolean;
   originalPrice?: number;
+  priority?: boolean;
 }
 
-export default function ProductCard({ product, isOnSale = false, originalPrice }: ProductCardProps) {
+export default function ProductCard({ product, isOnSale = false, originalPrice, priority = false }: ProductCardProps) {
   const [quantity, setQuantity] = useState(0);
   const mainImage = product.images && product.images.length > 0 ? product.images[0] : null;
   const displayOriginalPrice = originalPrice || (product as any).original_price;
@@ -29,6 +30,8 @@ export default function ProductCard({ product, isOnSale = false, originalPrice }
                   fill
                   className="object-contain group-hover:scale-105 transition-transform duration-300"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                  loading={priority ? 'eager' : 'lazy'}
+                  priority={priority}
                 />
                 {isOnSale && (
                   <div className="absolute bottom-2 left-2 bg-black text-white px-2.5 py-1 rounded text-xs font-semibold z-10 shadow-md">
