@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { createClient } from '@/lib/supabase/server';
 import ProductCard from '@/components/ProductCard';
 import AskForPriceForm from '@/components/AskForPriceForm';
@@ -32,29 +33,21 @@ const blogPosts = [
 export default async function HomePage() {
   const supabase = await createClient();
   
-  // Fetch proven bestsellers (3 products) - only with images
-  const { data: allBestsellers } = await (supabase as any)
+  // Fetch proven bestsellers (3 products) - ProductImage will handle missing/broken images
+  const { data: bestsellers } = await (supabase as any)
     .from('products')
     .select('*')
     .eq('status', 'active')
     .order('created_at', { ascending: false })
-    .limit(10);
-  
-  const bestsellers = (allBestsellers || []).filter((p: Product) => 
-    p.images && Array.isArray(p.images) && p.images.length > 0 && p.images[0] && p.images[0].trim() !== ''
-  ).slice(0, 3);
+    .limit(3);
 
-  // Fetch new arrivals (4 most recent products) - only with images
-  const { data: allNewArrivals } = await (supabase as any)
+  // Fetch new arrivals (4 most recent products) - ProductImage will handle missing/broken images
+  const { data: newArrivals } = await (supabase as any)
     .from('products')
     .select('*')
     .eq('status', 'active')
     .order('created_at', { ascending: false })
-    .limit(10);
-  
-  const newArrivals = (allNewArrivals || []).filter((p: Product) => 
-    p.images && Array.isArray(p.images) && p.images.length > 0 && p.images[0] && p.images[0].trim() !== ''
-  ).slice(0, 4);
+    .limit(4);
 
   // Fetch specific categories for "Shop our top categories" section
   const { data: topCategories } = await (supabase as any)
@@ -78,24 +71,30 @@ export default async function HomePage() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section with Two Images - Exact same as reference site */}
+      {/* Hero Section with Two Images */}
       <section className="relative w-full">
         <div className="grid grid-cols-1 md:grid-cols-2 h-[420px]">
-          {/* Left Image - Packaging/Shipping (person with tape dispenser) - Exact from reference */}
-          <div className="relative h-full w-full overflow-hidden">
-            <img
-              src="https://crelyztradeinc.com/cdn/shop/files/pexels-ketut-subiyanto-4246109.jpg?v=1755780336&width=1500"
+          {/* Left Image - Packaging/Shipping */}
+          <div className="relative h-full w-full overflow-hidden bg-gray-200">
+            <Image
+              src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80"
               alt="Packaging and shipping"
-              className="w-full h-full object-cover"
+              fill
+              className="object-cover"
+              priority
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
           
-          {/* Right Image - Warehouse with text overlay - Exact from reference */}
-          <div className="relative h-full w-full overflow-hidden">
-            <img
-              src="https://crelyztradeinc.com/cdn/shop/files/warehouse-image-saying-that-design-your-house-with-wholesale-rate.png?v=1755780197&width=1500"
-              alt="Design your house with wholesale rates"
-              className="w-full h-full object-cover"
+          {/* Right Image - Warehouse storage */}
+          <div className="relative h-full w-full overflow-hidden bg-gray-200">
+            <Image
+              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80"
+              alt="Warehouse storage with wholesale products"
+              fill
+              className="object-cover"
+              priority
+              sizes="(max-width: 768px) 100vw, 50vw"
             />
           </div>
         </div>

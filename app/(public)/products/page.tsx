@@ -80,15 +80,8 @@ export default function ProductsPage() {
       const response = await fetch(`/api/products?${params.toString()}`);
       if (response.ok) {
         const data = await response.json();
-        // Ensure we only set products with valid images
-        const validProducts = (data || []).filter((p: Product) => 
-          p.images && 
-          Array.isArray(p.images) && 
-          p.images.length > 0 && 
-          p.images[0] && 
-          p.images[0].trim() !== ''
-        );
-        setProducts(validProducts);
+        // Show all products - ProductImage component will handle broken images with fallback
+        setProducts(data || []);
       } else {
         console.error('Failed to fetch products:', response.statusText);
         setProducts([]);
@@ -109,14 +102,8 @@ export default function ProductsPage() {
 
   // Filter and sort products
   const filteredAndSortedProducts = useMemo(() => {
-    // First, filter out products without images
-    let filtered = products.filter((p) => 
-      p.images && 
-      Array.isArray(p.images) && 
-      p.images.length > 0 && 
-      p.images[0] && 
-      p.images[0].trim() !== ''
-    );
+    // Show all products - ProductImage component handles missing/broken images
+    let filtered = [...products];
 
     // Filter by availability
     if (availability === 'in_stock') {

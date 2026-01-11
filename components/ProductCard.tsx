@@ -21,7 +21,7 @@ export default function ProductCard({ product, isOnSale = false, originalPrice }
       <Link href={`/products/${product.slug}`} className="group block">
         <div className="relative w-full overflow-hidden bg-white">
           <div className="h-52 w-full bg-gray-50 flex items-center justify-center relative p-4">
-            {mainImage ? (
+            {mainImage && mainImage.trim() ? (
               <>
                 <ProductImage
                   src={mainImage}
@@ -31,15 +31,26 @@ export default function ProductCard({ product, isOnSale = false, originalPrice }
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                 />
                 {isOnSale && (
-                  <div className="absolute top-2 right-2 bg-red-600 text-white px-2.5 py-1 rounded text-xs font-semibold z-10 shadow-md">
+                  <div className="absolute bottom-2 left-2 bg-black text-white px-2.5 py-1 rounded text-xs font-semibold z-10 shadow-md">
                     Sale
                   </div>
                 )}
               </>
             ) : (
-              <div className="text-gray-400 flex items-center justify-center h-full">
-                <span className="text-sm">No Image</span>
-              </div>
+              <>
+                <ProductImage
+                  src=""
+                  alt={product.name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                />
+                {isOnSale && (
+                  <div className="absolute bottom-2 left-2 bg-black text-white px-2.5 py-1 rounded text-xs font-semibold z-10 shadow-md">
+                    Sale
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>
