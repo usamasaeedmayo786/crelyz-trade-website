@@ -11,8 +11,6 @@ const categoryDescriptions: Record<string, string> = {
   'kitchen': 'We provide all kinds of kitchen essentials in Canada, available on demand. From cookware to modern kitchen setups, we bring everything you need for a functional and stylish kitchen.',
   'furniture': 'Discover our wide range of furniture collections in Canada. From modern living room sets to elegant dining furniture, we offer quality pieces that combine style and comfort.',
   'home-appliances': 'Find the best home appliances in Canada. We offer a comprehensive selection of household appliances to make your home more efficient and comfortable.',
-  'tools': 'Professional and DIY tools available in Canada. From power tools to hand tools, we provide everything you need for your projects.',
-  'fitness': 'Transform your fitness journey with our range of fitness equipment in Canada. From home gym essentials to professional-grade equipment.',
   'wellness': 'Enhance your well-being with our wellness products available in Canada. Quality products for a healthier lifestyle.',
   'office': 'Complete your office setup with our office furniture and supplies in Canada. Ergonomic solutions for productive workspaces.',
 };

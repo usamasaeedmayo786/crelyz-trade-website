@@ -53,7 +53,7 @@ export default async function HomePage() {
   const { data: topCategories } = await (supabase as any)
     .from('categories')
     .select('*')
-    .in('slug', ['kitchen', 'office', 'furniture', 'home-appliances', 'tools'])
+    .in('slug', ['kitchen', 'office', 'furniture', 'home-appliances'])
     .order('name', { ascending: true });
 
   // Type assertions to help TypeScript
@@ -66,7 +66,6 @@ export default async function HomePage() {
     'office': 'We deal in all kinds of office furniture in Canada, available on demand. Create productive workspaces with our quality office solutions.',
     'furniture': 'We offer a wide range of furniture in Canada, available on demand. Transform your living spaces with our curated selection of quality pieces.',
     'home-appliances': 'We offer all kinds of home appliances in Canada, available on demand. Modern appliances to make your home life easier and more efficient.',
-    'tools': 'We provide all kinds of tools in Canada, available on demand. From hand tools to power tools, find everything for your projects.',
   };
 
   return (
@@ -206,7 +205,6 @@ export default async function HomePage() {
                   'office': 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800',
                   'furniture': 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800',
                   'home-appliances': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800',
-                  'tools': 'https://images.unsplash.com/photo-1504148455328-c376907d081c?w=800',
                 };
                 
                 return (
@@ -263,14 +261,6 @@ export default async function HomePage() {
                   </div>
                   <div className="p-4 bg-white">
                     <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">Home Appliance →</h3>
-                  </div>
-                </Link>
-                <Link href="/products?category=demo" className="bg-white rounded-lg overflow-hidden hover:shadow-xl transition-shadow group">
-                  <div className="aspect-w-16 aspect-h-9 w-full h-48 bg-gray-200 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1504148455328-c376907d081c?w=800" alt="Tools" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
-                  </div>
-                  <div className="p-4 bg-white">
-                    <h3 className="text-lg font-semibold text-gray-900 group-hover:text-blue-600 transition-colors">Tools →</h3>
                   </div>
                 </Link>
               </>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -54,11 +55,14 @@ export default function ContactPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Landscape Banner Image */}
-      <div className="w-full h-[300px] md:h-[400px] overflow-hidden relative">
-        <img
-          src="https://crelyztradeinc.com/cdn/shop/files/stocked-pallet-in-warehouse.jpg?v=1755878463&width=1500"
-          alt="Contact Us"
-          className="w-full h-full object-cover"
+      <div className="w-full h-[300px] md:h-[400px] overflow-hidden relative bg-gray-200">
+        <Image
+          src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2000&q=80"
+          alt="Contact Us - Warehouse and storage"
+          fill
+          className="object-cover"
+          priority
+          sizes="100vw"
         />
       </div>
 

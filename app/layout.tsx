@@ -24,10 +24,15 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const supabase = await createClient();
-  const { data: categories } = await supabase
+  const { data: allCategories } = await supabase
     .from('categories')
     .select('*')
     .order('name', { ascending: true });
+  
+  // Filter out tools and fitness categories
+  const categories = (allCategories || []).filter(
+    (cat: any) => cat.slug !== 'tools' && cat.slug !== 'fitness'
+  );
 
   return (
     <html lang="en">
