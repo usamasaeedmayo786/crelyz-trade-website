@@ -53,7 +53,7 @@ export default async function HomePage() {
   const { data: topCategories } = await (supabase as any)
     .from('categories')
     .select('*')
-    .in('slug', ['kitchen', 'office', 'furniture', 'home-appliances'])
+    .in('slug', ['kitchen', 'office', 'furniture', 'home-appliances', 'outdoor'])
     .order('name', { ascending: true });
 
   // Type assertions to help TypeScript
