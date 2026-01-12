@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { createClient } from '@/lib/supabase/server';
 import CategoriesDropdown from '@/components/CategoriesDropdown';
+import MobileNavigationMenu from '@/components/MobileNavigationMenu';
 
 // Get the canonical URL from environment variable or default
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://crelyztradeinc.com';
@@ -67,6 +68,7 @@ export default async function RootLayout({
                 <Link href="/" className="flex items-center px-2 py-2 text-xl font-bold text-white">
                   Crelyz Trade Inc.
                 </Link>
+                {/* Desktop Navigation */}
                 <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                   {categories && categories.length > 0 && (
                     <CategoriesDropdown categories={categories} />
@@ -80,21 +82,23 @@ export default async function RootLayout({
                 </div>
               </div>
               <div className="flex items-center space-x-4">
-                <Link href="/products" className="text-gray-300 hover:text-white p-2">
+                <Link href="/products" className="text-gray-300 hover:text-white p-2 hidden sm:block">
                   <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                   </svg>
                 </Link>
-                <Link href="/login" className="text-gray-300 hover:text-white p-2">
+                <Link href="/login" className="text-gray-300 hover:text-white p-2 hidden sm:block">
                   <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                   </svg>
                 </Link>
-                <Link href="/contact" className="text-gray-300 hover:text-white p-2">
+                <Link href="/contact" className="text-gray-300 hover:text-white p-2 hidden sm:block">
                   <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
                   </svg>
                 </Link>
+                {/* Mobile Menu Button */}
+                <MobileNavigationMenu categories={categories} />
               </div>
             </div>
           </div>
