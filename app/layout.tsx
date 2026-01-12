@@ -29,9 +29,24 @@ export default async function RootLayout({
     .select('*')
     .order('name', { ascending: true });
   
-  // Filter out tools and fitness categories
+  // Filter out tools, fitness, and equipment-related categories
+  const categoriesToExclude = ['tools', 'fitness', 'tools-and-equipments', 'equipments', 'equipment'];
   const categories = (allCategories || []).filter(
-    (cat: any) => cat.slug !== 'tools' && cat.slug !== 'fitness'
+    (cat: any) => {
+      const slug = cat.slug?.toLowerCase() || '';
+      const name = cat.name?.toLowerCase() || '';
+      
+      // Exclude by slug
+      if (categoriesToExclude.includes(slug)) return false;
+      
+      // Exclude by name (case-insensitive)
+      if (name.includes('tools') || name.includes('fitness') || 
+          name.includes('equipment') || name.includes('equipments')) {
+        return false;
+      }
+      
+      return true;
+    }
   );
 
   return (
