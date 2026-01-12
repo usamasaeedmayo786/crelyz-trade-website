@@ -21,7 +21,7 @@ FROM (VALUES
     'instant-pot-duo-7-in-1-electric-pressure-cooker',
     '7-in-1 electric pressure cooker, slow cooker, rice cooker, steamer, sauté pan, yogurt maker and warmer',
     'Instant Pot Duo 7-in-1 Electric Pressure Cooker features 7 cooking functions in one appliance. It replaces your pressure cooker, slow cooker, rice cooker, steamer, sauté pan, yogurt maker and warmer. Stainless steel cooking pot with 6 Quart capacity. Includes safe lid lock and steam release valve.',
-    'CT-KIT-003',
+    'CT-KIT-006',
     139.99,
     25,
     ARRAY['https://m.media-amazon.com/images/I/81R0aGO9jOL._AC_SL1500_.jpg']::TEXT[],
@@ -33,7 +33,7 @@ FROM (VALUES
     'ninja-foodi-8-in-1-digital-air-fryer-oven',
     '8-in-1 air fryer, convection oven, toaster, dehydrator and more with 6.5L capacity',
     'Ninja Foodi 8-in-1 Digital Air Fryer Oven combines 8 cooking functions in one compact appliance. Features air fry, roast, bake, broil, dehydrate, toast, bagel, and keep warm functions. Large 6.5L capacity perfect for families. Digital display with easy-to-use controls.',
-    'CT-KIT-004',
+    'CT-KIT-007',
     199.99,
     30,
     ARRAY['https://m.media-amazon.com/images/I/81J+hqDq6JL._AC_SL1500_.jpg']::TEXT[],
@@ -45,7 +45,7 @@ FROM (VALUES
     'oxo-good-grips-15-piece-pop-container-set',
     'Airtight food storage containers with push-button seal technology',
     'OXO Good Grips 15-Piece POP Container Set features push-button seal technology for airtight storage. Includes various sizes from small to large containers. Perfect for storing dry goods, snacks, and pantry items. Stackable design saves space.',
-    'CT-KIT-005',
+    'CT-KIT-008',
     89.99,
     40,
     ARRAY['https://m.media-amazon.com/images/I/81Yk0J7V3tL._AC_SL1500_.jpg']::TEXT[],
@@ -53,6 +53,10 @@ FROM (VALUES
   )
 ) AS p(name, slug, short_description, description, sku, price, stock_quantity, images, category_slug)
 JOIN categories c ON c.slug = p.category_slug
+WHERE NOT EXISTS (
+  SELECT 1 FROM products 
+  WHERE products.sku = p.sku OR products.slug = p.slug
+)
 ON CONFLICT (slug) DO NOTHING;
 
 -- OFFICE PRODUCTS (3+ products)
@@ -107,6 +111,10 @@ FROM (VALUES
   )
 ) AS p(name, slug, short_description, description, sku, price, stock_quantity, images, category_slug)
 JOIN categories c ON c.slug = p.category_slug
+WHERE NOT EXISTS (
+  SELECT 1 FROM products 
+  WHERE products.sku = p.sku OR products.slug = p.slug
+)
 ON CONFLICT (slug) DO NOTHING;
 
 -- FURNITURE PRODUCTS (3+ products)
@@ -161,6 +169,10 @@ FROM (VALUES
   )
 ) AS p(name, slug, short_description, description, sku, price, stock_quantity, images, category_slug)
 JOIN categories c ON c.slug = p.category_slug
+WHERE NOT EXISTS (
+  SELECT 1 FROM products 
+  WHERE products.sku = p.sku OR products.slug = p.slug
+)
 ON CONFLICT (slug) DO NOTHING;
 
 -- HOME APPLIANCES PRODUCTS (3+ products)
@@ -215,6 +227,10 @@ FROM (VALUES
   )
 ) AS p(name, slug, short_description, description, sku, price, stock_quantity, images, category_slug)
 JOIN categories c ON c.slug = p.category_slug
+WHERE NOT EXISTS (
+  SELECT 1 FROM products 
+  WHERE products.sku = p.sku OR products.slug = p.slug
+)
 ON CONFLICT (slug) DO NOTHING;
 
 -- OUTDOOR PRODUCTS (3+ products)
@@ -269,6 +285,10 @@ FROM (VALUES
   )
 ) AS p(name, slug, short_description, description, sku, price, stock_quantity, images, category_slug)
 JOIN categories c ON c.slug = p.category_slug
+WHERE NOT EXISTS (
+  SELECT 1 FROM products 
+  WHERE products.sku = p.sku OR products.slug = p.slug
+)
 ON CONFLICT (slug) DO NOTHING;
 
 -- SEASONAL PRODUCTS (3+ products)
@@ -323,6 +343,10 @@ FROM (VALUES
   )
 ) AS p(name, slug, short_description, description, sku, price, stock_quantity, images, category_slug)
 JOIN categories c ON c.slug = p.category_slug
+WHERE NOT EXISTS (
+  SELECT 1 FROM products 
+  WHERE products.sku = p.sku OR products.slug = p.slug
+)
 ON CONFLICT (slug) DO NOTHING;
 
 -- WELLNESS PRODUCTS (3+ products)
@@ -377,5 +401,9 @@ FROM (VALUES
   )
 ) AS p(name, slug, short_description, description, sku, price, stock_quantity, images, category_slug)
 JOIN categories c ON c.slug = p.category_slug
+WHERE NOT EXISTS (
+  SELECT 1 FROM products 
+  WHERE products.sku = p.sku OR products.slug = p.slug
+)
 ON CONFLICT (slug) DO NOTHING;
 
