@@ -207,7 +207,7 @@ export default async function HomePage() {
                   'office': 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800',
                   'furniture': 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800',
                   'home-appliances': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800',
-                  'outdoor': 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800',
+                  'outdoor': 'https://images.unsplash.com/photo-1538688525198-9b88f6f53126?w=800',
                   'seasonal': 'https://images.unsplash.com/photo-1482517967863-00e15c9b44be?w=800',
                 };
                 
