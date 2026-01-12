@@ -66,6 +66,8 @@ export default async function HomePage() {
     'office': 'We deal in all kinds of office furniture in Canada, available on demand. Create productive workspaces with our quality office solutions.',
     'furniture': 'We offer a wide range of furniture in Canada, available on demand. Transform your living spaces with our curated selection of quality pieces.',
     'home-appliances': 'We offer all kinds of home appliances in Canada, available on demand. Modern appliances to make your home life easier and more efficient.',
+    'outdoor': 'Explore our outdoor living collection in Canada. From patio furniture to outdoor accessories, create the perfect outdoor space for relaxation and entertainment.',
+    'seasonal': 'Discover seasonal products for every time of year in Canada. From holiday decorations to seasonal essentials, find everything you need for special occasions.',
   };
 
   return (
@@ -205,6 +207,8 @@ export default async function HomePage() {
                   'office': 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800',
                   'furniture': 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800',
                   'home-appliances': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800',
+                  'outdoor': 'https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=800',
+                  'seasonal': 'https://images.unsplash.com/photo-1482517967863-00e15c9b44be?w=800',
                 };
                 
                 return (

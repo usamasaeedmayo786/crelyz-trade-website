@@ -13,6 +13,8 @@ const categoryDescriptions: Record<string, string> = {
   'home-appliances': 'Find the best home appliances in Canada. We offer a comprehensive selection of household appliances to make your home more efficient and comfortable.',
   'wellness': 'Enhance your well-being with our wellness products available in Canada. Quality products for a healthier lifestyle.',
   'office': 'Complete your office setup with our office furniture and supplies in Canada. Ergonomic solutions for productive workspaces.',
+  'outdoor': 'Explore our outdoor living collection in Canada. From patio furniture to outdoor accessories, create the perfect outdoor space for relaxation and entertainment.',
+  'seasonal': 'Discover seasonal products for every time of year in Canada. From holiday decorations to seasonal essentials, find everything you need for special occasions.',
 };
 
 export default function ProductsPage() {
